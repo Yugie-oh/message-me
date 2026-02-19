@@ -48,6 +48,7 @@ GEM
       io-like (~> 0.4.0)
     arel (9.0.0)
     base64 (0.3.0)
+    bcrypt (3.1.21)
     bindex (0.8.1)
     bootsnap (1.23.0)
       msgpack (~> 1.2)
@@ -80,6 +81,7 @@ GEM
     ffi (1.17.3)
     globalid (1.1.0)
       activesupport (>= 5.0)
+    hirb (0.7.3)
     i18n (1.14.8)
       concurrent-ruby (~> 1.0)
     io-like (0.4.0)
@@ -224,11 +226,13 @@ PLATFORMS
   x86_64-darwin-25
 
 DEPENDENCIES
+  bcrypt (~> 3.1.7)
   bootsnap (>= 1.1.0)
   byebug
   capybara (>= 2.15)
   chromedriver-helper
   coffee-rails (~> 4.2)
+  hirb
   jbuilder (~> 2.5)
   jquery-rails
   listen (>= 3.0.5, < 3.2)
