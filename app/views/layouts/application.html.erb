@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>MessageMe</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= favicon_link_tag %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -16,7 +17,18 @@
         <%= render 'layouts/navigation' %>
       </div>
     </div>
-    <div class="ui container">
+    <div class="ui inverted vertical menu fluid mobile-nav-menu" id="mobile-nav-menu" style="display:none;">
+      <%= link_to "Chatroom", root_path, class: "item" %>
+      <a class="item">Messages</a>
+      <%= link_to "Friends", friends_path, class: "item" %>
+      <div class="ui divider"></div>
+      <% if logged_in? %>
+        <%= link_to "Log out", logout_path, method: :delete, class: "item" %>
+      <% else %>
+        <%= link_to "Log in", login_path, class: "item" %>
+      <% end %>
+    </div>
+    <div class="ui container main-container">
       <%= render "layouts/messages" %>
       <%= yield %>
     </div>

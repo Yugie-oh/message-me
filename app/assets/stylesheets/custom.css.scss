@@ -12,3 +12,93 @@
 .input button {
   display: none;
 }
+
+/* Navigation wrapper */
+@media (min-width: 768px) {
+  .desktop-nav-links {
+    display: flex !important;
+  }
+}
+
+/* Navigation & layout spacing */
+.ui.menu {
+  margin-bottom: 0 !important;
+}
+
+.main-container {
+  margin-top: 1em !important;
+}
+
+/* Navigation responsive styles */
+.mobile-only {
+  display: none !important;
+}
+
+.mobile-nav-menu {
+  border-radius: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+}
+
+@media (max-width: 767px) {
+  .desktop-nav-links {
+    display: none !important;
+  }
+
+  .desktop-only {
+    display: none !important;
+  }
+
+  .mobile-only {
+    display: flex !important;
+  }
+}
+
+/* Chatroom & Friends responsive styles */
+@media (max-width: 767px) {
+  .chatbox {
+    height: auto !important;
+    min-height: 300px;
+  }
+
+  #messages {
+    height: 50vw !important;
+    min-height: 200px;
+  }
+
+  .hide-on-mobile {
+    display: none !important;
+  }
+}
+
+/* Login page responsive styles */
+.login-wrapper {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 1em;
+}
+
+.login-title {
+  font-size: 1.4em !important;
+  line-height: 1.4 !important;
+}
+
+.login-segment {
+  padding: 2em 1.5em !important;
+}
+
+@media (max-width: 767px) {
+  .login-title {
+    font-size: 1.1em !important;
+  }
+
+  .login-divider {
+    display: none !important;
+  }
+
+  .signup-column {
+    text-align: center !important;
+    padding-top: 1.5em !important;
+    padding-bottom: 0.5em !important;
+  }
+}
