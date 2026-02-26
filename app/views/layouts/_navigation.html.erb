@@ -1,9 +1,13 @@
-<%= link_to "Chatroom", root_path, class: "item" %>
-<a class="item">
-  Messages
-</a>
+<%= link_to "MessageMe", root_path, class: "header item" %>
+
+<div class="desktop-nav-links">
+  <%= link_to "Chatroom", root_path, class: "item" %>
+  <a class="item">Messages</a>
+  <%= link_to "Friends", friends_path, class: "item" %>
+</div>
+
 <div class="right menu">
-  <div class="ui dropdown item">
+  <div class="ui dropdown item desktop-only">
     Account <i class="dropdown icon"></i>
     <div class="menu">
       <% if logged_in? %>
@@ -14,8 +18,11 @@
     </div>
   </div>
   <% if !logged_in? %>
-    <div class="item">
+    <div class="item desktop-only">
       <%= link_to "Log in", login_path, class: "ui primary button" %>
     </div>
   <% end %>
+  <a class="item mobile-only" id="nav-hamburger">
+    <i class="bars icon"></i>
+  </a>
 </div>

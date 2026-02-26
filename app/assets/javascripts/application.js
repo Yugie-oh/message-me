@@ -39,4 +39,13 @@ $(document).on('turbolinks:load', function() {
   });
   scroll_bottom();
   submit_message();
+
+  $('#nav-hamburger').on('click', function() {
+    $('#mobile-nav-menu').slideToggle(200);
+  });
+
+  // Close mobile menu on link click
+  $('#mobile-nav-menu a').on('click', function() {
+    $('#mobile-nav-menu').hide();
+  });
 })
