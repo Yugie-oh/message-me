@@ -1,4 +1,6 @@
 class Checklist < ApplicationRecord
+  EDIT_POLICIES = %w[everyone creator].freeze
+
   belongs_to :owner, class_name: "User"
   has_many :memberships, dependent: :destroy
   has_many :members, through: :memberships, source: :user
@@ -6,8 +8,13 @@ class Checklist < ApplicationRecord
   has_many :items, inverse_of: :checklist, dependent: :destroy
 
   validates :title, presence: true, length: { maximum: 80 }
+  validates :edit_policy, inclusion: { in: EDIT_POLICIES }
 
   before_validation :strip_title
+
+  def creator_only?
+    edit_policy == "creator"
+  end
 
   def member?(user)
     return false unless user

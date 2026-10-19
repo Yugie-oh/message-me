@@ -7,9 +7,14 @@ Rails.application.routes.draw do
   get "signup", to: "users#new"
   post "signup", to: "users#create"
 
-  resources :checklists, path: "sessions", only: [:index, :show, :create] do
+  resources :checklists, path: "sessions", only: [:index, :show, :create, :update] do
     resources :join_requests, only: [:create, :update]
-    resources :items, only: [:create, :update, :destroy]
+    resources :items, only: [:create, :update, :destroy] do
+      member do
+        post :lock
+        delete :unlock
+      end
+    end
   end
 
   mount ActionCable.server, at: "/cable"

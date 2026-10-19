@@ -1,4 +1,4 @@
-<div id="checklist" class="checklist-panel" data-checklist-id="<%= @checklist.id %>">
+<div id="checklist" class="checklist-panel" data-checklist-id="<%= @checklist.id %>" data-user-id="<%= current_user.id %>" data-edit-policy="<%= @checklist.edit_policy %>">
   <p><%= link_to "All sessions", checklists_path %></p>
   <h2 class="ui header">
     <i class="tasks orange icon"></i>
@@ -9,6 +9,7 @@
   </h2>
 
   <%= render "members", checklist: @checklist %>
+  <%= render "edit_policy", checklist: @checklist %>
   <% if @checklist.owner?(current_user) %>
     <%= render "join_requests", checklist: @checklist %>
   <% end %>

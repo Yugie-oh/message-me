@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2026_10_19_114503) do
+ActiveRecord::Schema.define(version: 2026_10_19_150000) do
 
   create_table "checklists", force: :cascade do |t|
     t.string "title", null: false
     t.integer "owner_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "edit_policy", default: "everyone", null: false
     t.index ["owner_id"], name: "index_checklists_on_owner_id"
   end
 
@@ -27,7 +28,12 @@ ActiveRecord::Schema.define(version: 2026_10_19_114503) do
     t.boolean "done", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "updated_by_id"
+    t.integer "editing_by_id"
+    t.datetime "editing_at"
     t.index ["checklist_id"], name: "index_items_on_checklist_id"
+    t.index ["editing_by_id"], name: "index_items_on_editing_by_id"
+    t.index ["updated_by_id"], name: "index_items_on_updated_by_id"
     t.index ["user_id"], name: "index_items_on_user_id"
   end
 

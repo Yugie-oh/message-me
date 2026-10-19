@@ -1,0 +1,15 @@
+<div class="edit-policy">
+  <% if checklist.owner?(current_user) %>
+    <%= form_with model: checklist, local: true, html: { id: "edit-policy-form", class: "ui form" } do %>
+      <label class="edit-policy-label">
+        <%= hidden_field_tag "checklist[edit_policy]", "everyone" %>
+        <%= check_box_tag "checklist[edit_policy]", "creator", checklist.creator_only?, id: "edit-policy-creator", onchange: "this.form.submit()" %>
+        Only the person who added an item can edit it
+      </label>
+    <% end %>
+  <% end %>
+  <p id="edit-policy-note" class="item-meta">
+    <%= checklist.creator_only? ? "Only the creator can edit an item." : "Anyone in this session can edit an item." %>
+    Checking an item complete is open to everyone.
+  </p>
+</div>

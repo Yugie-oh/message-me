@@ -153,24 +153,83 @@
   margin-top: 0.6em !important;
 }
 
+.edit-policy {
+  margin: 0.25em 0 1.25em;
+}
+
+.edit-policy-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5em;
+  cursor: pointer;
+}
+
 .checklist-item {
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
-  gap: 1em;
+  gap: 0.75em;
   padding: 0.85em 0;
   border-bottom: 1px solid rgba(34, 36, 38, 0.1);
 }
 
-.item-main {
+.item-check {
+  margin-top: 0.35em;
+}
+
+.item-copy {
+  flex: 1;
+  min-width: 0;
+}
+
+.item-actions {
   display: flex;
-  align-items: flex-start;
-  gap: 0.75em;
+  align-items: center;
+  gap: 0.15em;
+}
+
+.item-edit {
+  display: none;
+  background: none;
+  border: 0;
+  padding: 0.2em;
+  color: rgba(0, 0, 0, 0.45);
   cursor: pointer;
 }
 
-.item-main input {
-  margin-top: 0.25em;
+.checklist-item.can-edit .item-edit {
+  display: inline-flex;
+}
+
+.item-lock {
+  display: none;
+  color: #c05621;
+  font-size: 0.85em;
+  white-space: nowrap;
+}
+
+.checklist-item.is-locked-by-other .item-lock {
+  display: inline;
+}
+
+.checklist-item.is-locked-by-other .item-delete {
+  display: none;
+}
+
+.item-edit-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4em;
+}
+
+.item-edit-form input {
+  flex: 1;
+  min-width: 8em;
+}
+
+.item-error-note {
+  color: #9f3a38;
+  font-size: 0.85em;
+  margin-top: 0.35em;
 }
 
 .item-body,

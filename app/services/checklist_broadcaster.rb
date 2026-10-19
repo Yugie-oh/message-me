@@ -11,6 +11,14 @@ class ChecklistBroadcaster
     ChecklistChannel.broadcast_to checklist, action: "item_removed", id: item_id
   end
 
+  def self.policy_changed(checklist)
+    ChecklistChannel.broadcast_to(
+      checklist,
+      action: "edit_policy",
+      edit_policy: checklist.edit_policy
+    )
+  end
+
   def self.roster_changed(checklist)
     ChecklistChannel.broadcast_to(
       checklist,
@@ -29,6 +37,7 @@ class ChecklistBroadcaster
       item.checklist,
       action: action,
       id: item.id,
+      editing_by_id: item.locked? ? item.editing_by_id : nil,
       html: render("items/item", item: item)
     )
   end
