@@ -1,0 +1,10 @@
+<div id="members" class="member-row">
+  <% checklist.memberships.includes(:user).order(:created_at).each do |membership| %>
+    <span class="ui small <%= "orange" if membership.role == "owner" %> label">
+      <%= membership.user.username %>
+      <% if membership.role == "owner" %>
+        <span class="detail">owner</span>
+      <% end %>
+    </span>
+  <% end %>
+</div>

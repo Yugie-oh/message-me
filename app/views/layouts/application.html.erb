@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>MessageMe</title>
+    <title>Checklist</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= favicon_link_tag %>
     <%= csrf_meta_tags %>
@@ -18,9 +18,7 @@
       </div>
     </div>
     <div class="ui inverted vertical menu fluid mobile-nav-menu" id="mobile-nav-menu" style="display:none;">
-      <%= link_to "Chatroom", root_path, class: "item" %>
-      <a class="item">Messages</a>
-      <%= link_to "Friends", friends_path, class: "item" %>
+      <%= link_to "Sessions", root_path, class: "item" %>
       <div class="ui divider"></div>
       <% if logged_in? %>
         <%= link_to "Log out", logout_path, method: :delete, class: "item" %>

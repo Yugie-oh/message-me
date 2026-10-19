@@ -1,0 +1,21 @@
+<div id="join-requests">
+  <% requests = checklist.join_requests.pending.includes(:user) %>
+  <% if requests.any? %>
+    <div class="ui segment">
+      <h4 class="ui header">Join requests</h4>
+      <% requests.each do |join_request| %>
+        <div class="join-request">
+          <span><%= join_request.user.username %> wants to join</span>
+          <span class="join-request-actions">
+            <%= button_to "Approve", checklist_join_request_path(checklist, join_request),
+                  method: :patch, params: { status: "approved" },
+                  class: "ui tiny green button", form_class: "inline-form" %>
+            <%= button_to "Decline", checklist_join_request_path(checklist, join_request),
+                  method: :patch, params: { status: "declined" },
+                  class: "ui tiny basic button", form_class: "inline-form" %>
+          </span>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

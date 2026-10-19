@@ -1,0 +1,32 @@
+<div id="checklist" class="checklist-panel" data-checklist-id="<%= @checklist.id %>">
+  <p><%= link_to "All sessions", checklists_path %></p>
+  <h2 class="ui header">
+    <i class="tasks orange icon"></i>
+    <div class="content">
+      <%= @checklist.title %>
+      <div class="sub header">Started by <%= @checklist.owner.username %></div>
+    </div>
+  </h2>
+
+  <%= render "members", checklist: @checklist %>
+  <% if @checklist.owner?(current_user) %>
+    <%= render "join_requests", checklist: @checklist %>
+  <% end %>
+
+  <%= form_with model: [@checklist, @item], html: { id: "new-item-form", class: "ui form new-item-form" } do |f| %>
+    <div class="ui action fluid input">
+      <%= f.text_field :body, placeholder: "What needs doing?", maxlength: 200, required: true, autocomplete: "off" %>
+      <button class="ui orange button" type="submit">Add</button>
+    </div>
+    <div id="item-error" class="ui pointing red basic label item-error" style="display:none;">
+      Add a short description of what to do.
+    </div>
+  <% end %>
+
+  <div id="items" class="checklist-items">
+    <%= render @items %>
+  </div>
+  <p id="empty-items" class="empty-items <%= "is-hidden" if @items.any? %>">
+    Nothing on the list yet. Add the first thing to do.
+  </p>
+</div>

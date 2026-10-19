@@ -1,0 +1,33 @@
+<div class="login-wrapper">
+  <h2 class="ui center aligned icon header login-title">
+    Create an account
+  </h2>
+  <div class="ui segment login-segment">
+    <%= form_with model: @user, url: signup_path, local: true, html: { class: "ui form" } do |f| %>
+      <% if @user.errors.any? %>
+        <div class="ui negative message">
+          <ul class="list">
+            <% @user.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div class="field">
+        <%= f.label :username %>
+        <%= f.text_field :username, placeholder: "Username", autocomplete: "username", required: true %>
+      </div>
+      <div class="field">
+        <%= f.label :password %>
+        <%= f.password_field :password, placeholder: "At least 6 characters", autocomplete: "new-password", required: true %>
+      </div>
+      <div class="field">
+        <%= f.label :password_confirmation, "Confirm password" %>
+        <%= f.password_field :password_confirmation, placeholder: "Repeat password", autocomplete: "new-password", required: true %>
+      </div>
+      <%= f.submit "Sign up", class: "ui fluid orange button" %>
+    <% end %>
+    <div class="ui divider"></div>
+    <p>Already have an account? <%= link_to "Log in", login_path %></p>
+  </div>
+</div>

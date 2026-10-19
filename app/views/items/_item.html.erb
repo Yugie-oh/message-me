@@ -1,0 +1,14 @@
+<div id="item_<%= item.id %>" class="checklist-item <%= "is-done" if item.done %>">
+  <label class="item-main">
+    <input type="checkbox" <%= "checked" if item.done %> data-toggle-item data-url="<%= checklist_item_path(item.checklist, item) %>" aria-label="Mark <%= item.body %> done">
+    <span>
+      <span class="item-body"><%= item.body %></span>
+      <span class="item-meta">Added by <%= item.user.username %></span>
+    </span>
+  </label>
+  <%= link_to checklist_item_path(item.checklist, item), method: :delete, remote: true,
+        data: { confirm: "Remove this item?" },
+        class: "item-delete", aria: { label: "Remove #{item.body}" } do %>
+    <i class="trash alternate outline icon"></i>
+  <% end %>
+</div>

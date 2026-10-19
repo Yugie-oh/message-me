@@ -1,11 +1,16 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root 'chatroom#index'
-  get 'login', to: 'sessions#new'
-  post 'login', to: 'sessions#create'
-  delete 'logout', to: 'sessions#destroy'
-  post 'message', to: 'messages#create'
-  get 'friends', to: 'users#index'
+  root "checklists#index"
 
-  mount ActionCable.server, at: '/cable'
+  get "login", to: "sessions#new"
+  post "login", to: "sessions#create"
+  delete "logout", to: "sessions#destroy"
+  get "signup", to: "users#new"
+  post "signup", to: "users#create"
+
+  resources :checklists, path: "sessions", only: [:index, :show, :create] do
+    resources :join_requests, only: [:create, :update]
+    resources :items, only: [:create, :update, :destroy]
+  end
+
+  mount ActionCable.server, at: "/cable"
 end

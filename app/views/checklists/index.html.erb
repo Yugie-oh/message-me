@@ -1,0 +1,74 @@
+<div class="ui raised segment">
+  <h3 class="ui header">
+    <i class="plus circle orange icon"></i>
+    Start a session
+  </h3>
+  <%= form_with model: @checklist, local: true, html: { class: "ui form" } do |f| %>
+    <% if @checklist.errors.any? %>
+      <div class="ui negative message">
+        <%= @checklist.errors.full_messages.to_sentence %>
+      </div>
+    <% end %>
+    <div class="field">
+      <%= f.label :title, "Session name" %>
+      <%= f.text_field :title, placeholder: "Weekend groceries", maxlength: 80, required: true %>
+    </div>
+    <%= f.submit "Create session", class: "ui orange button" %>
+  <% end %>
+</div>
+
+<div class="ui stackable two column grid session-columns">
+  <div class="column">
+    <h3 class="ui header">Your sessions</h3>
+    <% if @checklists.any? %>
+      <div class="ui one cards">
+        <% @checklists.each do |session_list| %>
+          <% done, total = session_list.progress %>
+          <%= link_to session_list, class: "ui fluid card" do %>
+            <div class="content">
+              <div class="header"><%= session_list.title %></div>
+              <div class="meta">
+                <%= done %> of <%= total %> done
+                · <%= pluralize(session_list.memberships.size, "person") %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="ui placeholder segment">
+        <div class="ui icon header">
+          <i class="clipboard outline icon"></i>
+          You have not joined a session yet
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="column">
+    <h3 class="ui header">Available sessions</h3>
+    <% if @available.any? %>
+      <% @available.each do |session_list| %>
+        <div class="ui segment available-session">
+          <div class="available-session-copy">
+            <strong><%= session_list.title %></strong>
+            <div class="meta">Started by <%= session_list.owner.username %></div>
+          </div>
+          <% if @pending_checklist_ids.include?(session_list.id) %>
+            <div class="ui tiny yellow label">Requested</div>
+          <% else %>
+            <%= button_to "Request to join", checklist_join_requests_path(session_list),
+                  class: "ui tiny orange button", form_class: "inline-form" %>
+          <% end %>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="ui placeholder segment">
+        <div class="ui icon header">
+          <i class="users icon"></i>
+          No open sessions right now
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

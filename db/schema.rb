@@ -10,7 +10,48 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2026_02_19_092345) do
+ActiveRecord::Schema.define(version: 2026_10_19_114503) do
+
+  create_table "checklists", force: :cascade do |t|
+    t.string "title", null: false
+    t.integer "owner_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["owner_id"], name: "index_checklists_on_owner_id"
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.integer "checklist_id", null: false
+    t.integer "user_id", null: false
+    t.string "body", null: false
+    t.boolean "done", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["checklist_id"], name: "index_items_on_checklist_id"
+    t.index ["user_id"], name: "index_items_on_user_id"
+  end
+
+  create_table "join_requests", force: :cascade do |t|
+    t.integer "checklist_id", null: false
+    t.integer "user_id", null: false
+    t.string "status", default: "pending", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["checklist_id", "user_id"], name: "index_join_requests_on_checklist_id_and_user_id", unique: true
+    t.index ["checklist_id"], name: "index_join_requests_on_checklist_id"
+    t.index ["user_id"], name: "index_join_requests_on_user_id"
+  end
+
+  create_table "memberships", force: :cascade do |t|
+    t.integer "checklist_id", null: false
+    t.integer "user_id", null: false
+    t.string "role", default: "member", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["checklist_id", "user_id"], name: "index_memberships_on_checklist_id_and_user_id", unique: true
+    t.index ["checklist_id"], name: "index_memberships_on_checklist_id"
+    t.index ["user_id"], name: "index_memberships_on_user_id"
+  end
 
   create_table "messages", force: :cascade do |t|
     t.text "body"

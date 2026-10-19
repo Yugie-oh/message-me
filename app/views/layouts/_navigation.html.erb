@@ -1,28 +1,23 @@
-<%= link_to "MessageMe", root_path, class: "header item" %>
+<%= link_to "Checklist", root_path, class: "header item" %>
 
 <div class="desktop-nav-links">
-  <%= link_to "Chatroom", root_path, class: "item" %>
-  <a class="item">Messages</a>
-  <%= link_to "Friends", friends_path, class: "item" %>
+  <%= link_to "Sessions", root_path, class: "item" %>
 </div>
 
 <div class="right menu">
-  <div class="ui dropdown item desktop-only">
-    Account <i class="dropdown icon"></i>
-    <div class="menu">
-      <% if logged_in? %>
+  <% if logged_in? %>
+    <div class="ui dropdown item desktop-only">
+      <%= current_user.username %> <i class="dropdown icon"></i>
+      <div class="menu">
         <%= link_to "Log out", logout_path, method: :delete, class: "item" %>
-      <% else %>
-        <%= link_to "Log in", login_path, class: "item" %>
-      <% end %>
+      </div>
     </div>
-  </div>
-  <% if !logged_in? %>
+  <% else %>
     <div class="item desktop-only">
       <%= link_to "Log in", login_path, class: "ui primary button" %>
     </div>
   <% end %>
-  <a class="item mobile-only" id="nav-hamburger">
+  <a class="item mobile-only" id="nav-hamburger" aria-label="Open menu">
     <i class="bars icon"></i>
   </a>
 </div>
